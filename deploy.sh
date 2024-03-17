@@ -16,4 +16,4 @@ python3 -m pip install --upgrade pip
 echo "Installing dependency"
 python3 -m pip install -r requirements.txt
 echo "Running the app"
-python3 app.py
+python3 app.py >> log.txt 2>&1 &
