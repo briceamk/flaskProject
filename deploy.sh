@@ -5,12 +5,12 @@ git clone https://github.com/briceamk/flaskProject.git
 echo "Change directory to enter in project"
 cd flaskProject
 echo "Create virtual env"
-python -m venv venv
+python3 -m venv venv
 echo "Activating venv"
 source venv/bin/activate
 echo "Updating pip"
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 echo "Installing dependency"
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 echo "Running the app"
-python app.py
+python3 app.py
