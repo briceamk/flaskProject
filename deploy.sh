@@ -12,6 +12,9 @@ if [ -d "$PROJECT_DIR" ]; then
   python3 -m pip install --upgrade pip
   echo "Installing dependency"
   python3 -m pip install -r requirements.txt
+  echo "Stopping streamlit and flask"
+  ps aux | grep -i 'streamlit run web.py' | awk {'print $2'} | head -n 1 | xargs kill -9
+  ps aux | grep -i 'python3 app.py' | awk {'print $2'} | head -n 1 | xargs kill -9
   echo "Running the app"
   python3 app.py >> flask.log 2>&1 &
   streamlit run web.py >> streamlit.log 2>&1 &
