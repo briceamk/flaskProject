@@ -19,3 +19,8 @@ def test_should_return_hello_world(client):
     response = client.get('/')
     assert response.data.decode() == 'Hello World!'
     assert response.status_code == 200
+
+
+def test_should_return_employees(client):
+    response = client.get('/employees')
+    assert len(response.json) == 3
