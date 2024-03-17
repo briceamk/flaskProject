@@ -4,7 +4,7 @@ sudo apt install python3-pip -y
 echo "Installing python3 env"
 sudo apt install python3-venv -y
 echo "Clone the project"
-git clone https://github.com/briceamk/flaskProject.git
+git clone -b develop https://github.com/briceamk/flaskProject.git
 echo "Change directory to enter in project"
 cd flaskProject
 echo "Create virtual env"
