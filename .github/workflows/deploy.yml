@@ -1,0 +1,9 @@
+name: Build Flask App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+

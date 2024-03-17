@@ -1,0 +1,55 @@
+name: Build Flask App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Create virtual env
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Test
+        run: |
+          pytest -v tests/
+
+      - name: Set up SSH key and whitelist EC2 IP address
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploying in EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
+          PROJECT_HOME_DIR: ${{ secrets.PROJECT_HOME_DIR }}
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+
+        run: |
+          ssh -o StrictHostKeyChecking=no  $EC2_USERNAME@$EC2_HOST
+            cd $PROJECT_HOME_DIR &&
+            git pull &&
+            sudo systemctl restart $SERVICE_NAME
+
