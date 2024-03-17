@@ -18,4 +18,4 @@ python3 -m pip install -r requirements.txt
 echo "Running the app"
 
 nohup python3 app.py > flask.log &
-nohup streamlit run web.py > streamlit.log &
+nohup python -m streamlit run web.py > streamlit.log &
