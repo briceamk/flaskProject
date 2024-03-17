@@ -75,7 +75,7 @@ jobs:
 
         run: |
           ssh -o StrictHostKeyChecking=no  ubuntu@54.236.252.140
-            git clone git@github.com:briceamk/flaskProject.git &&
+            git clone https://github.com/briceamk/flaskProject.git &&
             cd flaskProject &&
             python -m venv venv &&
             source venv/bin/activate &&
