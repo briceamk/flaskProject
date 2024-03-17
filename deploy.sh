@@ -1,16 +1,17 @@
 #!/bin/bash
 
-PROJECT_DIR = "flaskProject"
-echo "Installing python3 pip"
-sudo apt install python3-pip -y
-echo "Installing python3 env"
-sudo apt install python3-venv -y
+PROJECT_DIR="flaskProject"
+
 if [ -d "$PROJECT_DIR" ]; then
   echo "$DIRECTORY found. we are going to pull"
   cd $DIRECTORY
   git pull
 fi
 if [ ! -d "$PROJECT_DIR" ]; then
+  echo "Installing python3 pip"
+  sudo apt install python3-pip -y
+  echo "Installing python3 env"
+  sudo apt install python3-venv -y
   echo "$DIRECTORY not found. we are going to clone"
   git clone -b develop https://github.com/briceamk/flaskProject.git
   echo "Change directory to enter in project"
