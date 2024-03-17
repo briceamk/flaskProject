@@ -2,7 +2,7 @@ name: Build Flask App
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
 
 jobs:
 
