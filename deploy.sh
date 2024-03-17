@@ -1,5 +1,8 @@
 #!/bin/bash
-
+echo "Installing python3 pip"
+sudo apt install python3-pip -y
+echo "Installing python3 env"
+sudo apt install python3-venv -y
 echo "Clone the project"
 git clone https://github.com/briceamk/flaskProject.git
 echo "Change directory to enter in project"
