@@ -4,7 +4,7 @@ PROJECT_DIR="flaskProject"
 
 if [ -d "$PROJECT_DIR" ]; then
   echo "$DIRECTORY found. we are going to pull"
-  cd $DIRECTORY
+  cd $PROJECT_DIR
   git pull
   echo "Activating venv"
   source venv/bin/activate
@@ -21,10 +21,10 @@ if [ ! -d "$PROJECT_DIR" ]; then
   sudo apt install python3-pip -y
   echo "Installing python3 env"
   sudo apt install python3-venv -y
-  echo "$DIRECTORY not found. we are going to clone"
+  echo "$PROJECT_DIR not found. we are going to clone"
   git clone -b develop https://github.com/briceamk/flaskProject.git
   echo "Change directory to enter in project"
-  cd $DIRECTORY
+  cd $PROJECT_DIR
   echo "Create virtual env"
   python3 -m venv venv
   echo "Activating venv"
