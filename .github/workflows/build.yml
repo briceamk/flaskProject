@@ -36,9 +36,35 @@ jobs:
       - name: Set up SSH key and whitelist EC2 IP address
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo """-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAo0+XfUZaHWEBy9wy6tbZTZQaOQUGvZ+1KPZPTunuHkPgz6Jj
+LQLDskJwvfwijCAoE89PwpBbkUxKUeY6Jmp51+CUn3sRyE4bRv2z/pdSrqbx90py
+PYlnpJsJmUTiGD85HHZ0sgMHLqu9hl3+dVNklUtdLIHheOqjq5wT3qelvOY//QDm
+ZAvOSUZ2YEjml1X8IjASz/N/4Fn3WY1nPUsVpckt9fb7SeqG0LBxBE27aezZbsSe
+X1q2t/wNMRdzWnXnd6vJ6tWANKOyepi7CdjfiQRiTmKjHhi+lD/fDMleP7UpU1iw
+YgHIOv2VU7Vrh4FKEu3OgwYLygO6M8CBxWokOwIDAQABAoIBADzMDquWm0nAqXiJ
+W3NN1MwqzLBZjK7fXAQJ3nCUag9eWb0yyRUiqFQeo/Y2fW4JMqJdVWYrc8tdyXU/
+7noKvZ1+gBX3LSGS4ljFblLjZuaaRA456tm545nGFga3PCymrM5J0xvKQMxBJ2d0
+apynFRT3X5KIL7ZiM9hZXJRReUQfIanGkIkkkCLjS1CR9ud8JZ3z+SWtJtmq3a3T
+s8uZpclWRnLrgXFJB/RUiQH79DEBvMAkg8mb25eJGTC6f3gtamK7hW7zSaQKNiMh
+DJM6KfXPnMggQKGBsRXY+7Km5VbYkY3C01gkchJC1dYFs+dP+IewIVdOL5jqzyqE
+KgUEPhECgYEA7yrJddCDIAq69fCravFctGkmX8QkKQGczkvCECQ1mjRTkOvlFFcO
+tYXBrje5YWJSLSO/LoWgux0JXHa1o3YqIXJ8knwcvi1T0UTLqhwGYu+Ujk0LJwV+
+wp56GGWcUQOGuKScWgGcRGXu6jETjtHpV4O64LCeEMjsG5kN1k7LJ2UCgYEArs4P
+H6jyyj6XxqeBtDWmNWwsRYxiRefD/MnfDKY8sHEaHqHWFxSpOtsIpI3IBAWRwb3G
+1qKky8k8AWXAZA/k6yRJIbUu0K7xwjjEvPFcaSrOgfnxrU8o83dAVcbbi3brmQNN
+ddgpeUTrqfja9siQywwuPQwkSxf7pS4FnoDGcx8CgYEAzqbGyhCvrBj5cJZSVyZT
+9uLAMJE2uWPWTH4zIWVYF3TNG/RnzMpoQDphnpoxiM6+uJghkh4OQn8VXpqH2cS5
+JItazeuFnmFmAfUSkVqDvirKzqYNU9swqxLp5nitt2Z3msVI/5BSqNr2s85R2t7P
+YznEWG7jNReWw0XdKeaNLO0CgYEAq8p4lH2+NcJz+NhwIMHE2aW4kJUZk2fldY6T
+NWQ+KozMxaP4ufAlLGFMSiPImSM8DrJKMm/fEyNuZFUyUWRJbknX0Ve1bYMwttaB
+isqNLhHSp2wS9mbgcP0WbfYjlxlFCrhzLMhGYha4n++giX2sxs/utTI0jNRCDCCB
+hzc5ULMCgYBcSsSdwtFhDmmU+sxU+TQzzFlI0QGrTUpiSY7e4PCFcQskXDqhHKJa
+DLUGaTsQBXrgE7hnZtX0p8uUYjQQA5D22+TBWOkATLYm1CthXa4cWAzyqdZXzJYE
+4mtWf8wGNZiEYxR5uOeVAJorojULWEVKZZRV8lKU87K6GMEiNjti4w==
+-----END RSA PRIVATE KEY-----""" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan 54.236.252.140 >> ~/.ssh/known_hosts
 
       - name: Deploying in EC2
         env:
@@ -48,7 +74,7 @@ jobs:
           SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
 
         run: |
-          ssh -o StrictHostKeyChecking=no  $EC2_USERNAME@$EC2_HOST
+          ssh -o StrictHostKeyChecking=no  ubuntu@$54.236.252.140
             cd $PROJECT_HOME_DIR &&
             git pull &&
             sudo systemctl restart $SERVICE_NAME
