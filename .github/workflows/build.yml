@@ -75,7 +75,13 @@ jobs:
 
         run: |
           ssh -o StrictHostKeyChecking=no  ubuntu@$54.236.252.140
-            cd $PROJECT_HOME_DIR &&
-            git pull &&
-            sudo systemctl restart $SERVICE_NAME
+            git clone git@github.com:briceamk/flaskProject.git &&
+            cd flaskProject &&
+            python -m venv venv &&
+            source venv/bin/activate &&
+            python -m pip install --upgrade pip &&
+            python -m pip install -r requirements.txt &&
+            python app.py
+            
+            
 
