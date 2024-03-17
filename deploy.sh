@@ -18,8 +18,7 @@ if [ -d "$PROJECT_DIR" ]; then
   echo "Running the app"
   python3 app.py >> flask.log 2>&1 &
   streamlit run web.py >> streamlit.log 2>&1 &
-fi
-if [ ! -d "$PROJECT_DIR" ]; then
+else
   echo "Installing python3 pip"
   sudo apt install python3-pip -y
   echo "Installing python3 env"
