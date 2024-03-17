@@ -16,4 +16,5 @@ python3 -m pip install --upgrade pip
 echo "Installing dependency"
 python3 -m pip install -r requirements.txt
 echo "Running the app"
-python3 app.py >> log.txt 2>&1 &
+python3 app.py >> app.log 2>&1 &
+streamlit run web.py >> streamlit.log 2>&1 &

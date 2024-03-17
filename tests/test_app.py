@@ -11,11 +11,11 @@ def client():
 
 
 def test_should_status_code_ok(client):
-    response = client.get('/index')
+    response = client.get('/')
     assert response.status_code == 200
 
 
 def test_should_return_hello_world(client):
-    response = client.get('/index')
+    response = client.get('/')
     assert response.data.decode() == 'Hello World!'
     assert response.status_code == 200
