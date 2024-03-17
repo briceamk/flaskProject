@@ -74,14 +74,14 @@ jobs:
           SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
 
         run: |
-          ssh -o StrictHostKeyChecking=no  ubuntu@54.236.252.140 &&
-            git clone https://github.com/briceamk/flaskProject.git &&
+          ssh -o StrictHostKeyChecking=no  ubuntu@54.236.252.140
+            "git clone https://github.com/briceamk/flaskProject.git &&
             cd flaskProject &&
             python -m venv venv &&
             source venv/bin/activate &&
             python -m pip install --upgrade pip &&
             python -m pip install -r requirements.txt &&
-            python app.py
+            python app.py"
             
             
 
